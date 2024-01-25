@@ -2,6 +2,7 @@ package com.qsp.students_springboot.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import com.qsp.students_springboot.exception.DataNotAvailable;
 import com.qsp.students_springboot.exception.EmailNotFoundException;
 import com.qsp.students_springboot.exception.IdNotFoundException;
 import com.qsp.students_springboot.exception.PhoneNotFoundException;
-import com.qsp.students_springboot.util.ResponseSturcture;
+import com.qsp.students_springboot.util.ResponseStructure;
 
 @Service
 public class StudentsService
@@ -21,7 +22,7 @@ public class StudentsService
 		@Autowired
 		private StudentsDao dao;
 		
-		public ResponseEntity<ResponseSturcture<Students>> saveStudents(Students students)
+		public ResponseEntity<ResponseStructure<Students>> saveStudents(Students students)
 		{
 			int secMarks=students.getSecuredMarks();
 			int totalMarks=students.getTotalMarks();
@@ -54,20 +55,20 @@ public class StudentsService
 				students.setGrade("Distinction");
 			}
 			
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 			
 			structure.setMessage("Saved Successfully");
 			structure.setStatus(HttpStatus.CREATED.value());
 			structure.setData(dao.saveStudents(students));
 			
-			return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.CREATED );
+			return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.CREATED );
 			
 			
 		}
-		public ResponseEntity<ResponseSturcture<Students>> fetchStudents(int id)
+		public ResponseEntity<ResponseStructure<Students>> fetchStudents(int id)
 		{
 			Students students=dao.fetchStudents(id);
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			if(students !=null)
 			{
@@ -75,7 +76,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.fetchStudents(id));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.FOUND );
 
 			}
 			else
@@ -85,9 +86,9 @@ public class StudentsService
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<List<Students>>> fetchAllStudents()
+		public ResponseEntity<ResponseStructure<List<Students>>> fetchAllStudents()
 		{
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 			
 			List<Students> list=dao.fetchAllStudents();
 
@@ -101,15 +102,15 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(list);
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> deleteStudents(int id)
+		public ResponseEntity<ResponseStructure<Students>> deleteStudents(int id)
 		{
 			Students students=dao.deleteStudents(id);
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			if(students !=null)
 			{
@@ -118,7 +119,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.NO_CONTENT.value());
 				structure.setData(dao.deleteStudents(id));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.NO_CONTENT );
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.NO_CONTENT );
 
 			}
 			else
@@ -127,11 +128,11 @@ public class StudentsService
 			}
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> updateStudents(int id, Students students)
+		public ResponseEntity<ResponseStructure<Students>> updateStudents(int id, Students students)
 		{
 			Students dbStudents=dao.fetchStudents(id);
 			
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 			
 			int secMarks=students.getSecuredMarks();
 			int totalMarks=students.getTotalMarks();
@@ -171,7 +172,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.ACCEPTED.value());
 				structure.setData(dao.updateStudents(id, students));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.ACCEPTED );
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.ACCEPTED );
 
 				
 			}
@@ -183,10 +184,10 @@ public class StudentsService
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> updateEmail(int id,String email)
+		public ResponseEntity<ResponseStructure<Students>> updateEmail(int id,String email)
 		{
 			Students students=dao.fetchStudents(id);
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			if(students !=null)
 			{
@@ -196,7 +197,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.ACCEPTED.value());
 				structure.setData(dao.updateStudents(id, students));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.ACCEPTED);
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.ACCEPTED);
 
 			}
 			else
@@ -206,10 +207,10 @@ public class StudentsService
 			}
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> updatePhone(int id, long phone)
+		public ResponseEntity<ResponseStructure<Students>> updatePhone(int id, long phone)
 		{
 			Students students=dao.fetchStudents(id);  
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			
 			if(students !=null)
@@ -220,7 +221,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.ACCEPTED.value());
 				structure.setData(dao.updateStudents(id, students));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.ACCEPTED);
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.ACCEPTED);
 
 			}
 			else
@@ -232,10 +233,10 @@ public class StudentsService
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> updateSecuredMarks(int id, int secureMarks)
+		public ResponseEntity<ResponseStructure<Students>> updateSecuredMarks(int id, int secureMarks)
 		{
 			Students students=dao.fetchStudents(id);  
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			
 			if(students !=null)
@@ -278,7 +279,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.ACCEPTED.value());
 				structure.setData(dao.updateStudents(id, students));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.ACCEPTED);
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.ACCEPTED);
 
 			}
 			else
@@ -289,11 +290,11 @@ public class StudentsService
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> findByEmail(String email)
+		public ResponseEntity<ResponseStructure<Students>> findByEmail(String email)
 		{
 			Students students=dao.findByEmail(email);
 			
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			if(students !=null)
 			{
@@ -301,7 +302,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findByEmail(email));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.FOUND);
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.FOUND);
 
 			}
 			else
@@ -311,11 +312,11 @@ public class StudentsService
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<Students>> findByPhone(long phone)
+		public ResponseEntity<ResponseStructure<Students>> findByPhone(long phone)
 		{
 			Students students=dao.findByPhone(phone);
 			
-			ResponseSturcture<Students> structure=new ResponseSturcture<>();
+			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			if(students !=null)
 			{
@@ -323,7 +324,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findByPhone(phone));
 				
-				return new ResponseEntity<ResponseSturcture<Students>>(structure,HttpStatus.FOUND);
+				return new ResponseEntity<ResponseStructure<Students>>(structure,HttpStatus.FOUND);
 
 			}
 			else
@@ -333,9 +334,9 @@ public class StudentsService
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<List<Students>>> findByGrade(String grade)
+		public ResponseEntity<ResponseStructure<List<Students>>> findByGrade(String grade)
 		{
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 
 			List<Students> list=dao.findByGrade(grade);
 			
@@ -349,16 +350,16 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findByGrade(grade));
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<List<Students>>> findByPercentageGreaterThan(double percentage)
+		public ResponseEntity<ResponseStructure<List<Students>>> findByPercentageGreaterThan(double percentage)
 		{
 			
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 
 			List<Students> list=dao.findByPercentageGreaterThan(percentage);
 			
@@ -373,16 +374,16 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findByPercentageGreaterThan(percentage));
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 			
 		}
 		
 
-		public ResponseEntity<ResponseSturcture<List<Students>>> findByPercentageLessThan(double percentage)
+		public ResponseEntity<ResponseStructure<List<Students>>> findByPercentageLessThan(double percentage)
 		{
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 
 			List<Students> list=dao.findByPercentageLessThan(percentage);
 			
@@ -397,15 +398,15 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findByPercentageLessThan(percentage));
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<List<Students>>> findByMarksLessThan(int marks)
+		public ResponseEntity<ResponseStructure<List<Students>>> findByMarksLessThan(int marks)
 		{
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 
 			List<Students> list=dao.findBySecuredMarksLessThan(marks);
 			
@@ -420,15 +421,15 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findBySecuredMarksLessThan(marks));
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 			
 		}
 		
-		public ResponseEntity<ResponseSturcture<List<Students>>> findByMarksGreaterThan(int marks)
+		public ResponseEntity<ResponseStructure<List<Students>>> findByMarksGreaterThan(int marks)
 		{
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 
 			List<Students> list=dao.findBySecuredMarksGreaterThan(marks);
 			
@@ -443,14 +444,14 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findBySecuredMarksGreaterThan(marks));
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 			
 		}
-		public ResponseEntity<ResponseSturcture<List<Students>>> findByName(String name)
+		public ResponseEntity<ResponseStructure<List<Students>>> findByName(String name)
 		{
-			ResponseSturcture<List<Students>> structure=new ResponseSturcture<>();
+			ResponseStructure<List<Students>> structure=new ResponseStructure<>();
 
 			List<Students> list=dao.findByName(name);
 			
@@ -465,7 +466,7 @@ public class StudentsService
 				structure.setStatus(HttpStatus.FOUND.value());
 				structure.setData(dao.findByName(name));
 				
-				return new ResponseEntity<ResponseSturcture<List<Students>>>(structure,HttpStatus.FOUND );
+				return new ResponseEntity<ResponseStructure<List<Students>>>(structure,HttpStatus.FOUND );
 
 			}
 			

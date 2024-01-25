@@ -1,8 +1,6 @@
 package com.qsp.students_springboot.util;
 
-
-
-public class ResponseSturcture<T>
+public class ResponseStructure <T> 
 {
 
 	private String message;
@@ -27,5 +25,4 @@ public class ResponseSturcture<T>
 	public void setData(T data) {
 		this.data = data;
 	}
-
 }
