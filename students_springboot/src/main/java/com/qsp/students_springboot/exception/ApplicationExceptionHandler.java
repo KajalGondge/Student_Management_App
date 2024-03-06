@@ -44,7 +44,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
 			
 			structure.setMessage(exception.getMessage());
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
-			structure.setData("Employee with Respective phone is not found..");
+			structure.setData("Employee with Respective Phone is not found..");
 			
 			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND );
 		}
