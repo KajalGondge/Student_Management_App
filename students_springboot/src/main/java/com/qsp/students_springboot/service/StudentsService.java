@@ -109,7 +109,7 @@ public class StudentsService
 		
 		public ResponseEntity<ResponseStructure<Students>> deleteStudents(int id)
 		{
-			Students students=dao.deleteStudents(id);
+			Students students=dao.fetchStudents(id);
 			ResponseStructure<Students> structure=new ResponseStructure<>();
 
 			if(students !=null)

@@ -1,6 +1,7 @@
 package com.qsp.students_springboot.dao;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,12 +106,12 @@ public class StudentsDao
 		
 		public List<Students> findBySecuredMarksLessThan(int marks)
 		{
-			return repo.findStudentsByPercentageLessThan(marks);
+			return repo.findStudentsBySecuredMarksLessThan(marks);
 		}
 		
 		public List<Students> findBySecuredMarksGreaterThan(int marks)
 		{
-			return repo.findStudentsByPercentageLessThan(marks);
+			return repo.findStudentsBySecuredMarksGreaterThan(marks);
 		}
 		
 		public List<Students> findByName(String name)

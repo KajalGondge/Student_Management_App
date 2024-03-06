@@ -32,7 +32,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
 			
 			structure.setMessage(exception.getMessage());
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
-			structure.setData("Employee with Respective id is not found..");
+			structure.setData("Employee with Respective email is not found..");
 			
 			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND );
 		}
@@ -44,7 +44,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
 			
 			structure.setMessage(exception.getMessage());
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
-			structure.setData("Employee with Respective id is not found..");
+			structure.setData("Employee with Respective phone is not found..");
 			
 			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND );
 		}
@@ -56,7 +56,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
 			
 			structure.setMessage(exception.getMessage());
 			structure.setStatus(HttpStatus.NOT_FOUND.value());
-			structure.setData("Employee with Respective id is not found..");
+			structure.setData("Employee with Respective data is not available..");
 			
 			return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND );
 		}

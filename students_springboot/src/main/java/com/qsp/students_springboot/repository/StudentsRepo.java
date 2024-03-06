@@ -9,6 +9,7 @@ import com.qsp.students_springboot.dto.Students;
 public interface StudentsRepo extends JpaRepository<Students, Integer>
 {
 
+		// no need to write public abstract bcoz in interface by default method is public abstract
 		Students findStudentsByEmail(String email);
 		
 		Students findStudentsByPhone(long phone);
